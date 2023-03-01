@@ -4,6 +4,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:parcial_movil/favorites.dart';
 import 'package:parcial_movil/schema_article.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -68,6 +69,13 @@ class _ListScreenState extends State<ListScreen> {
       ),
       body: Column(
         children: [
+          ElevatedButton(
+              onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FavoriteScreen()),
+                  ),
+              child: Text("Favoritos")),
           Expanded(
             child: ListView.builder(
               itemCount: _articles.length,

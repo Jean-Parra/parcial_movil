@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'sqlite.dart';
+
 abstract class Widgets extends StatefulWidget {
   final Image foto;
   final String nombre;
@@ -29,6 +31,7 @@ class _WidgetsState extends State<Widgets> {
     return Stack(
       children: [
         Container(
+          width: widget.vertical ? 190 : 400,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
@@ -55,10 +58,23 @@ class _WidgetsState extends State<Widgets> {
               color: _starred ? Colors.yellow : Colors.grey,
               size: 40,
             ),
-            onPressed: () {
+            onPressed: () async {
               setState(() {
                 _starred = !_starred;
               });
+              if (_starred) {
+                final data = {
+                  'foto': widget.foto.toString().substring(
+                      widget.foto.toString().indexOf('"') + 1,
+                      widget.foto.toString().lastIndexOf('"')),
+                  'nombre': widget.nombre,
+                  'vendedor': widget.vendedor,
+                  'calificacion': widget.calificacion,
+                };
+                await DBHelper.insert('favoritos', data);
+              } else {
+                await DBHelper.delete('favoritos', widget.nombre);
+              }
             },
           ),
         ),

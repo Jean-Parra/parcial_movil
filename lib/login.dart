@@ -68,13 +68,15 @@ class _LoginScreenState extends State<LoginScreen> {
               const FlutterLogo(size: 70, style: FlutterLogoStyle.horizontal),
               const SizedBox(height: 80),
               TextField(
-                key: const Key('email'),
-                controller: emailController,
-                decoration: const InputDecoration(
-                  hintText: 'Correo electrónico',
-                  labelText: 'Correo electrónico',
-                ),
-              ),
+                  key: const Key('email'),
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    hintText: 'Correo electrónico',
+                    labelText: 'Correo electrónico',
+                  ),
+                  onChanged: (value) {
+                    setState(() {});
+                  }),
               const SizedBox(height: 16.0),
               TextField(
                 key: const Key('password'),
@@ -84,6 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   labelText: 'Contraseña',
                 ),
                 obscureText: true,
+                onChanged: (value) {
+                  setState(() {});
+                },
               ),
               const SizedBox(height: 32.0),
               ElevatedButton(
