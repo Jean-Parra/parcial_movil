@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-abstract class Widgets extends StatelessWidget {
+abstract class Widgets extends StatefulWidget {
   final Image foto;
   final String nombre;
   final String vendedor;
@@ -18,29 +18,58 @@ abstract class Widgets extends StatelessWidget {
       required this.vertical});
 
   @override
+  State<Widgets> createState() => _WidgetsState();
+}
+
+class _WidgetsState extends State<Widgets> {
+  bool _starred = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromARGB(255, 100, 100, 100),
-            offset: Offset(5, 5),
-            blurRadius: 10,
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(255, 100, 100, 100),
+                offset: Offset(5, 5),
+                blurRadius: 10,
+              ),
+            ],
           ),
-        ],
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      child: vertical ? _buildVerticalLayout() : _buildHorizontalLayout(),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: widget.vertical
+              ? _buildVerticalLayout()
+              : _buildHorizontalLayout(),
+        ),
+        Positioned(
+          right: 20,
+          bottom: 20,
+          child: IconButton(
+            icon: Icon(
+              _starred ? Icons.star : Icons.star_outline,
+              color: _starred ? Colors.yellow : Colors.grey,
+              size: 40,
+            ),
+            onPressed: () {
+              setState(() {
+                _starred = !_starred;
+              });
+            },
+          ),
+        ),
+      ],
     );
   }
 
   Widget _buildHorizontalLayout() {
     return Row(
       children: [
-        SizedBox(width: 120, height: 120, child: foto),
+        SizedBox(width: 120, height: 120, child: widget.foto),
         const SizedBox(width: 20),
         Expanded(
           child: Column(
@@ -55,7 +84,7 @@ abstract class Widgets extends StatelessWidget {
   Widget _buildVerticalLayout() {
     return Column(
       children: [
-        SizedBox(width: 120, height: 120, child: foto),
+        SizedBox(width: 120, height: 120, child: widget.foto),
         const SizedBox(height: 20),
         ..._buildTextWidgets(),
       ],
@@ -64,26 +93,55 @@ abstract class Widgets extends StatelessWidget {
 
   List<Widget> _buildTextWidgets() {
     return [
-      Text(
-        "Articulo: $nombre",
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-          color: Colors.black,
+      RichText(
+        text: TextSpan(
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
+          children: <TextSpan>[
+            const TextSpan(
+              text: "Articulo: ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextSpan(text: widget.nombre),
+          ],
         ),
       ),
-      Text(
-        "Vendedor: $vendedor",
-        style: const TextStyle(
-          fontSize: 18,
-          color: Colors.black,
+      RichText(
+        text: TextSpan(
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
+          children: <TextSpan>[
+            const TextSpan(
+              text: "Vendedor: ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextSpan(text: widget.vendedor),
+          ],
         ),
       ),
-      Text(
-        "Calificación: $calificacion",
-        style: const TextStyle(
-          fontSize: 18,
-          color: Colors.black,
+      RichText(
+        text: TextSpan(
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+          ),
+          children: <TextSpan>[
+            const TextSpan(
+              text: "Calificación: ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextSpan(text: widget.calificacion),
+          ],
         ),
       )
     ];

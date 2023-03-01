@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
     var jsonResponse = null;
 
     var response = await http
-        .post(Uri.parse("http://10.153.76.132:3000/signin"), body: data);
+        .post(Uri.parse("http://192.168.184.145:3000/signin"), body: data);
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       print('Response status: ${response.statusCode}');

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 mongoose.set("strictQuery", true);
-mongoose.connect("mongodb://127.0.0.1:27017/parcial_movil", {
+mongoose.connect("mongodb+srv://usuario_upb:contrasena_upb@cluster0.ya3bz0q.mongodb.net/parcial_movil?retryWrites=true&w=majority", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })

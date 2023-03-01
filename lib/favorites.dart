@@ -16,7 +16,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
     var response =
-        await http.get(Uri.parse('http://10.153.76.132:3000/logout'));
+        await http.get(Uri.parse('http://192.168.184.145:3000/logout'));
     if (response.statusCode == 200) {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');

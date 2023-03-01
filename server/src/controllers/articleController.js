@@ -15,9 +15,9 @@ router.get('/getArticles', async(req, res) => {
 
 router.post('/registerArticles', async(req, res) => {
     try {
-        const { imagen, nombre, vendedor, calificacion } = req.body;
+        const { foto, nombre, vendedor, calificacion } = req.body;
         const article = new Article({
-            imagen,
+            foto,
             nombre,
             vendedor,
             calificacion
@@ -29,3 +29,5 @@ router.post('/registerArticles', async(req, res) => {
         res.status(500).send("Error al registrar producto");
     }
 });
+
+module.exports = router;
