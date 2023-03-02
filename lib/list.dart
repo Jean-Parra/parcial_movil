@@ -1,14 +1,14 @@
-// ignore_for_file: use_build_context_synchronously
-// ignore_for_file: library_private_types_in_public_api, avoid_print
+// ignore_for_file: avoid_print, library_private_types_in_public_api
 
 import 'dart:convert';
-
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:parcial_movil/favorites.dart';
+import 'package:parcial_movil/main.dart';
 import 'package:parcial_movil/schema_article.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'login.dart';
 import 'widget_list.dart';
 
 class ListScreen extends StatefulWidget {
@@ -25,14 +25,19 @@ class _ListScreenState extends State<ListScreen> {
     _fetchArticles();
   }
 
+  Future<String> convertImageToBase64(String imageUrl) async {
+    var response = await http.get(Uri.parse(imageUrl));
+    Uint8List bytes = response.bodyBytes;
+    String base64Image = base64Encode(bytes);
+    return base64Image;
+  }
+
   Future<void> _fetchArticles() async {
-    print("utilizando...");
     var response =
         await http.get(Uri.parse("http://192.168.184.145:3000/getArticles"));
     print(response.statusCode);
 
     if (response.statusCode == 200) {
-      print("hola");
       final jsonData = jsonDecode(response.body);
       print(jsonData);
       setState(() {
@@ -41,7 +46,6 @@ class _ListScreenState extends State<ListScreen> {
             .toList();
       });
     } else {
-      print("chao");
       throw Exception('Error al cargar artículos');
     }
   }
@@ -54,10 +58,7 @@ class _ListScreenState extends State<ListScreen> {
     if (response.statusCode == 200) {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const LoginScreen()));
+      Get.to(() => const MyApp());
     }
   }
 
@@ -70,12 +71,8 @@ class _ListScreenState extends State<ListScreen> {
       body: Column(
         children: [
           ElevatedButton(
-              onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const FavoriteScreen()),
-                  ),
-              child: Text("Favoritos")),
+              onPressed: () => Get.to(() => const FavoriteScreen()),
+              child: const Text("Favoritos")),
           Expanded(
             child: ListView.builder(
               itemCount: _articles.length,
@@ -83,7 +80,8 @@ class _ListScreenState extends State<ListScreen> {
                 Article article = _articles[index];
                 return WidgetList(
                   key: ValueKey(index),
-                  foto: Image.asset("assets/${article.foto}"),
+                  foto: Image.memory(
+                      convertImageToBase64(article.foto) as Uint8List),
                   nombre: article.nombre,
                   vendedor: article.vendedor,
                   calificacion: article.calificacion,

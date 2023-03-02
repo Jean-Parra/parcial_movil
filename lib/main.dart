@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'list.dart';
 import 'login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: LoginScreen());
+    return GetMaterialApp(
+      initialRoute: "/",
+      getPages: [
+        GetPage(name: "/", page: () => const LoginScreen()),
+        GetPage(name: "/pagina-dos", page: () => const ListScreen()),
+      ],
+    );
   }
 
   @override
@@ -33,17 +40,10 @@ class _MyAppState extends State<MyApp> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
       print("token vacio");
-
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const LoginScreen()));
+      Get.to(() => const LoginScreen());
     } else {
       print("token lleno");
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const ListScreen()));
+      Get.to(() => const ListScreen());
     }
   }
 }
