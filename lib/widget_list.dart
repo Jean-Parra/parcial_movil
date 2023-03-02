@@ -27,6 +27,12 @@ class _WidgetsState extends State<Widgets> {
   bool _starred = false;
 
   @override
+  void initState() {
+    super.initState();
+    _starred = widget.vertical;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
