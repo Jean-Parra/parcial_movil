@@ -1,9 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 // ignore_for_file: library_private_types_in_public_api, avoid_print
-import 'dart:convert';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'schema_article.dart';
 import 'sqlite.dart';
 import 'widget_list.dart';
@@ -21,13 +18,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   void initState() {
     super.initState();
     _getArticles();
-  }
-
-  Future<String> convertImageToBase64(String imageUrl) async {
-    var response = await http.get(Uri.parse(imageUrl));
-    Uint8List bytes = response.bodyBytes;
-    String base64Image = base64Encode(bytes);
-    return base64Image;
   }
 
   Future<void> _getArticles() async {
@@ -60,7 +50,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           Article article = _articles[index];
           return WidgetList(
             key: ValueKey(index),
-            foto: Image.memory(article.foto as Uint8List),
+            foto: Image.network(article.foto),
             nombre: article.nombre,
             vendedor: article.vendedor,
             calificacion: article.calificacion,

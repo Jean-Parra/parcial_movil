@@ -1,14 +1,13 @@
 // ignore_for_file: avoid_print, library_private_types_in_public_api
 
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parcial_movil/favorites.dart';
-import 'package:parcial_movil/main.dart';
 import 'package:parcial_movil/schema_article.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'login.dart';
 import 'widget_list.dart';
 
 class ListScreen extends StatefulWidget {
@@ -23,13 +22,6 @@ class _ListScreenState extends State<ListScreen> {
   void initState() {
     super.initState();
     _fetchArticles();
-  }
-
-  Future<String> convertImageToBase64(String imageUrl) async {
-    var response = await http.get(Uri.parse(imageUrl));
-    Uint8List bytes = response.bodyBytes;
-    String base64Image = base64Encode(bytes);
-    return base64Image;
   }
 
   Future<void> _fetchArticles() async {
@@ -58,7 +50,7 @@ class _ListScreenState extends State<ListScreen> {
     if (response.statusCode == 200) {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
-      Get.to(() => const MyApp());
+      Get.to(() => const LoginScreen());
     }
   }
 
@@ -80,8 +72,7 @@ class _ListScreenState extends State<ListScreen> {
                 Article article = _articles[index];
                 return WidgetList(
                   key: ValueKey(index),
-                  foto: Image.memory(
-                      convertImageToBase64(article.foto) as Uint8List),
+                  foto: Image.network(article.foto),
                   nombre: article.nombre,
                   vendedor: article.vendedor,
                   calificacion: article.calificacion,
