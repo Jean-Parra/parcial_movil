@@ -13,9 +13,13 @@ class Article {
 
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
-        foto: json['foto'],
-        nombre: json['nombre'],
-        vendedor: json['vendedor'],
-        calificacion: json['calificacion']);
+      foto: json['foto'] ?? '', // Provide a default value if 'foto' is null
+      nombre:
+          json['nombre'] ?? '', // Provide a default value if 'nombre' is null
+      vendedor: json['vendedor'] ??
+          '', // Provide a default value if 'vendedor' is null
+      calificacion: json['calificacion'] ??
+          '', // Provide a default value if 'calificacion' is null
+    );
   }
 }

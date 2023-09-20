@@ -1,0 +1,13 @@
+com.example.parcial_movil.app-core-1.6.0-0 C:\Users\yampi\.gradle\caches\transforms-3\46ba99fe9efa61652d55d750c2b6c036\transformed\core-1.6.0\res
+com.example.parcial_movil.app-jetified-window-java-1.0.0-beta04-1 C:\Users\yampi\.gradle\caches\transforms-3\70d74eab8f9ca2c2a65123954666da04\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.parcial_movil.app-jetified-window-1.0.0-beta04-2 C:\Users\yampi\.gradle\caches\transforms-3\82f218b30ba1b0bb05bf622761b8068e\transformed\jetified-window-1.0.0-beta04\res
+com.example.parcial_movil.app-jetified-annotation-experimental-1.1.0-3 C:\Users\yampi\.gradle\caches\transforms-3\d0f5972ec434f1dda0a7cc6ca8f145d8\transformed\jetified-annotation-experimental-1.1.0\res
+com.example.parcial_movil.app-debug-4 C:\flutter\parcial_movil\android\app\src\debug\res
+com.example.parcial_movil.app-main-5 C:\flutter\parcial_movil\android\app\src\main\res
+com.example.parcial_movil.app-pngs-6 C:\flutter\parcial_movil\build\app\generated\res\pngs\debug
+com.example.parcial_movil.app-resValues-7 C:\flutter\parcial_movil\build\app\generated\res\resValues\debug
+com.example.parcial_movil.app-rs-8 C:\flutter\parcial_movil\build\app\generated\res\rs\debug
+com.example.parcial_movil.app-mergeDebugResources-9 C:\flutter\parcial_movil\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.parcial_movil.app-mergeDebugResources-10 C:\flutter\parcial_movil\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.parcial_movil.app-merged_res-11 C:\flutter\parcial_movil\build\app\intermediates\merged_res\debug
+com.example.parcial_movil.app-packaged_res-12 C:\flutter\parcial_movil\build\shared_preferences_android\intermediates\packaged_res\debug
