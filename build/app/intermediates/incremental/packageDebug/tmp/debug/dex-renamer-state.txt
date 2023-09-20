@@ -1,4 +1,0 @@
-#Wed Sep 20 08:42:45 COT 2023
-base.0=C\:\\flutter\\parcial_movil\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
