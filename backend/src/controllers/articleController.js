@@ -20,7 +20,8 @@ router.post('/registerArticles', async(req, res) => {
             foto,
             nombre,
             vendedor,
-            calificacion
+            calificacion,
+            false: false
         });
         await article.save();
         res.status(200).json({ check: true });
@@ -29,5 +30,26 @@ router.post('/registerArticles', async(req, res) => {
         res.status(500).send("Error al registrar producto");
     }
 });
+
+router.put('/estrella', async (req, res) => {
+    try {
+      const nombre = req.query.nombre; 
+  
+      const article = await Article.findOne({ nombre });
+      if (!article) {
+        return res.status(404).send('Article not found');
+      }
+  
+      article.estrella = !article.estrella;
+      await article.save();
+      res.status(200).json({ success: true, article });
+    } catch (e) {
+      console.log(e);
+      res.status(500).send('Error toggling estrella attribute');
+    }
+  });
+  
+  
+  
 
 module.exports = router;

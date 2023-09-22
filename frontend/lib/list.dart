@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print, library_private_types_in_public_api
 
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parcial_movil/favorites.dart';
@@ -28,7 +27,7 @@ class _ListScreenState extends State<ListScreen> {
 
   Future<void> _fetchArticles() async {
     var response =
-        await http.get(Uri.parse("http://192.168.57.145:3000/getArticles"));
+        await http.get(Uri.parse("http://192.168.0.31:3000/getArticles"));
     print(response.statusCode);
 
     if (response.statusCode == 200) {
@@ -54,8 +53,7 @@ class _ListScreenState extends State<ListScreen> {
   void _logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
-    var response =
-        await http.get(Uri.parse('http://192.168.57.145:3000/logout'));
+    var response = await http.get(Uri.parse('http://192.168.0.31:3000/logout'));
     if (response.statusCode == 200) {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
@@ -81,13 +79,13 @@ class _ListScreenState extends State<ListScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       Article article = _articles[index];
                       return WidgetList(
-                        key: ValueKey(index),
-                        foto: Image.network(article.foto),
-                        nombre: article.nombre,
-                        vendedor: article.vendedor,
-                        calificacion: article.calificacion,
-                        vertical: vertical,
-                      );
+                          key: ValueKey(index),
+                          foto: Image.network(article.foto),
+                          nombre: article.nombre,
+                          vendedor: article.vendedor,
+                          calificacion: article.calificacion,
+                          vertical: vertical,
+                          estrella: article.estrella);
                     },
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -98,13 +96,13 @@ class _ListScreenState extends State<ListScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       Article article = _articles[index];
                       return WidgetList(
-                        key: ValueKey(index),
-                        foto: Image.network(article.foto),
-                        nombre: article.nombre,
-                        vendedor: article.vendedor,
-                        calificacion: article.calificacion,
-                        vertical: vertical,
-                      );
+                          key: ValueKey(index),
+                          foto: Image.network(article.foto),
+                          nombre: article.nombre,
+                          vendedor: article.vendedor,
+                          calificacion: article.calificacion,
+                          vertical: vertical,
+                          estrella: article.estrella);
                     },
                   ),
           ),

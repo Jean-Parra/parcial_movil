@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'main.dart';
+import 'list.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -29,8 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
     Map data = {'email': email, 'password': pass};
     var jsonResponse = null;
 
-    var response = await http
-        .post(Uri.parse("http://192.168.57.145:3000/signin"), body: data);
+    var response = await http.post(Uri.parse("http://192.168.0.31:3000/signin"),
+        body: data);
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       print('Response status: ${response.statusCode}');
@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => const MyApp()));
+                builder: (BuildContext context) => const ListScreen()));
       }
     } else {
       setState(() {

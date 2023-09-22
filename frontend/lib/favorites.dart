@@ -29,11 +29,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     List<Article> articles = [];
     for (var item in data) {
       Article article = Article(
-        foto: item['foto'],
-        nombre: item['nombre'],
-        vendedor: item['vendedor'],
-        calificacion: item['calificacion'],
-      );
+          foto: item['foto'],
+          nombre: item['nombre'],
+          vendedor: item['vendedor'],
+          calificacion: item['calificacion'],
+          estrella: item['estrella'] == 1);
       articles.add(article);
     }
     setState(() {
@@ -59,13 +59,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       itemBuilder: (BuildContext context, int index) {
                         Article article = _articles[index];
                         return WidgetList(
-                          key: ValueKey(index),
-                          foto: Image.network(article.foto),
-                          nombre: article.nombre,
-                          vendedor: article.vendedor,
-                          calificacion: article.calificacion,
-                          vertical: vertical,
-                        );
+                            key: ValueKey(index),
+                            foto: Image.network(article.foto),
+                            nombre: article.nombre,
+                            vendedor: article.vendedor,
+                            calificacion: article.calificacion,
+                            vertical: vertical,
+                            estrella: !article.estrella);
                       },
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
@@ -76,13 +76,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       itemBuilder: (BuildContext context, int index) {
                         Article article = _articles[index];
                         return WidgetList(
-                          key: ValueKey(index),
-                          foto: Image.network(article.foto),
-                          nombre: article.nombre,
-                          vendedor: article.vendedor,
-                          calificacion: article.calificacion,
-                          vertical: vertical,
-                        );
+                            key: ValueKey(index),
+                            foto: Image.network(article.foto),
+                            nombre: article.nombre,
+                            vendedor: article.vendedor,
+                            calificacion: article.calificacion,
+                            vertical: vertical,
+                            estrella: !article.estrella);
                       },
                     ),
             ),

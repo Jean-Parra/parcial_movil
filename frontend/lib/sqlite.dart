@@ -6,10 +6,10 @@ class DBHelper {
   static Future<Database> database() async {
     final dbPath = await getDatabasesPath();
     return openDatabase(
-      join(dbPath, 'parcial_movil.db'),
+      join(dbPath, 'parcial_movil_prueba.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE favoritos(id INTEGER PRIMARY KEY, foto TEXT, nombre TEXT, vendedor TEXT, calificacion TEXT)',
+          'CREATE TABLE favoritos(id INTEGER PRIMARY KEY, foto TEXT, nombre TEXT, vendedor TEXT, calificacion TEXT, estrella INTEGER)',
         );
       },
       version: 1,
@@ -18,7 +18,15 @@ class DBHelper {
 
   static Future<void> insert(String table, Map<String, Object> data) async {
     final db = await DBHelper.database();
-    db.insert(
+    List<Map<String, dynamic>> existingData = await db.query(
+      table,
+      where: 'foto = ?',
+      whereArgs: [data['foto']],
+    );
+    if (existingData.isNotEmpty) {
+      return;
+    }
+    await db.insert(
       table,
       data,
       conflictAlgorithm: ConflictAlgorithm.replace,

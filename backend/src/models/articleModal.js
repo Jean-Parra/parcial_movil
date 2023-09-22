@@ -4,7 +4,8 @@ const articleShema = new Schema({
     foto: String,
     nombre: String,
     vendedor: String,
-    calificacion: String
+    calificacion: String,
+    estrella: Boolean
 });
 
 

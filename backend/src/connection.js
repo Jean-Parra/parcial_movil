@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 mongoose.set("strictQuery", true);
-mongoose.connect("mongodb+srv://usuario_upb:contrasena_upb@cluster0.ya3bz0q.mongodb.net/parcial_movil?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://usuario_upb:contrasena_upb@cluster0.ya3bz0q.mongodb.net/parcial_movil_prueba?retryWrites=true&w=majority", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
