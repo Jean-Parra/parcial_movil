@@ -20,8 +20,8 @@ class DBHelper {
     final db = await DBHelper.database();
     List<Map<String, dynamic>> existingData = await db.query(
       table,
-      where: 'foto = ?',
-      whereArgs: [data['foto']],
+      where: 'nombre = ?',
+      whereArgs: [data['nombre']],
     );
     if (existingData.isNotEmpty) {
       return;
